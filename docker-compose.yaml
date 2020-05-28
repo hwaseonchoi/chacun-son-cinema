@@ -1,0 +1,36 @@
+version: '3.7'
+services:
+  postgres:
+    image: postgres:latest
+    container_name: database
+    ports:
+      - 5433:5432
+    environment:
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: chacun_son_cinema
+
+  php-fpm:
+    build: docker/php
+    container_name: php-fpm
+    volumes:
+      - .:/var/www
+    ports:
+      - "9000:9000"
+    depends_on:
+      - postgres
+
+  nginx:
+    build:
+      context: docker/nginx
+    container_name: nginx
+    volumes:
+      - .:/var/www
+      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./docker/nginx/sites/:/etc/nginx/sites-available
+      - ./docker/nginx/conf.d/:/etc/nginx/conf.d
+      - ./docker/logs/nginx:/var/log/nginx:rw
+    depends_on:
+      - php-fpm
+    ports:
+      - "81:80"
+
