@@ -16,6 +16,7 @@ class SearchController extends AbstractController
     public function search(Request $request)
     {
         $query = $request->query->get('q');
-        return new Response('200',200);
+
+        return $this->renderView('');
     }
 }
