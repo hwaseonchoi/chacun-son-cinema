@@ -70,7 +70,7 @@ class Film
     public static function create($data)
     {
         $film = new Film();
-        $film->setDirector($data['Director']);
+      //  $film->setDirector($data['Director']);
         $film->setTitle($data['Title']);
         $film->setYear($data['Year']);
 

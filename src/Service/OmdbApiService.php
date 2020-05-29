@@ -18,9 +18,17 @@ class OmdbApiService
 
     public function searchByTitle($query)
     {
-        $results = $this->connector->request('GET','&t=' . $query);
-        if ($results->toArray()) {
-            return [Film::create($results->toArray())];
+        $results = $this->connector->request('GET','&s=' . $query);
+
+        if ($datas = $results->toArray()) {
+            $values = $datas['Search'];
+            foreach ($values as $film) {
+
+                $films[] = Film::create($film);
+
+            }
         }
+
+        return $films;
     }
 }
