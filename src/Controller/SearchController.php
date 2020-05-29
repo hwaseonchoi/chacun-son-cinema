@@ -18,10 +18,10 @@ class SearchController extends AbstractController
         $title = $request->query->get('title');
         $year = $request->query->get('year');
         $director = $request->query->get('director');
-        $queries = ['title'=>$title, 'year'=>$year, 'director'=>$director];
 
-        $results = $omdbApiService->searchByTitle($title);
+        $results['films'] = $omdbApiService->searchByTitle($title);
+        $results['queries'] = ['title'=>$title, 'year'=>$year, 'director'=>$director];
 
-        return $this->render('search.html.twig', $queries);
+        return $this->render('search.html.twig', $results);
     }
 }

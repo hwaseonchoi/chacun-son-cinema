@@ -5,13 +5,38 @@
 <body>
 <h1>Chacun son cinéma</h1>
 <form>
-    <input name="title" type="text" value="{{ title }}" />
+    <input name="title" type="text" value="{{ queries.title }}" />
     <button type="submit">search by title</button>
-    <input name="year" type="number" value="{{ year }}" />
+    <input name="year" type="number" value="{{ queries.year }}" />
     <button type="submit">search by year</button>
-    <input name="director" type="text" value="{{ director }}" />
+    <input name="director" type="text" value="{{ queries.director }}" />
     <button type="submit">search by director</button>
 </form>
 
+<p>Nombre de résultats : {{ films|length }}</p>
+<table>
+    <thead>
+    <tr>
+        <th>Titre</th>
+        <th>Année</th>
+        <th>Réalisateur</th>
+    </tr>
+    </thead>
+    {% for film in films %}
+    <tbody>
+        <tr>
+            <td>
+                {{ film.title }}
+            </td>
+            <td>
+                {{ film.year }}
+            </td>
+            <td>
+                {{ film.director }}
+            </td>
+        </tr>
+    </tbody>
+    {% endfor %}
+</table>
 </body>
 </html>

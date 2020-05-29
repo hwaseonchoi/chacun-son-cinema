@@ -2,7 +2,7 @@
 
 namespace App\Service;
 
-use Symfony\Component\HttpClient\HttpClient;
+use App\Model\Film;
 
 class OmdbApiService
 {
@@ -18,8 +18,9 @@ class OmdbApiService
 
     public function searchByTitle($query)
     {
-        $client = HttpClient::create();
-
-        return $client->request('GET',$this->connector->connect() . '&t=' .$query);
+        $results = $this->connector->request('GET','&t=' . $query);
+        if ($results->toArray()) {
+            return [Film::create($results->toArray())];
+        }
     }
 }
