@@ -2,9 +2,9 @@
 
 namespace App\Controller;
 
+use App\Service\OmdbApiService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class SearchController extends AbstractController
@@ -13,10 +13,15 @@ class SearchController extends AbstractController
      * @Route("/search", name="search", methods={"GET"})
      * @return string
      */
-    public function search(Request $request)
+    public function search(Request $request, OmdbApiService $omdbApiService)
     {
-        $query = $request->query->get('q');
+        $title = $request->query->get('title');
+        $year = $request->query->get('year');
+        $director = $request->query->get('director');
+        $queries = ['title'=>$title, 'year'=>$year, 'director'=>$director];
 
-        return $this->renderView('');
+        $results = $omdbApiService->searchByTitle($title);
+
+        return $this->render('search.html.twig', $queries);
     }
 }
