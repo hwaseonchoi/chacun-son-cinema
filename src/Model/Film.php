@@ -20,6 +20,16 @@ class Film
     public $year;
 
     /**
+     * @var string
+     */
+    public $imdbID;
+
+    /**
+     * @var string
+     */
+    public $poster;
+
+    /**
      * @return string
      */
     public function getTitle(): string
@@ -67,12 +77,46 @@ class Film
         $this->year = $year;
     }
 
+    /**
+     * @return string
+     */
+    public function getPoster(): string
+    {
+        return $this->poster;
+    }
+
+    /**
+     * @param string $poster
+     */
+    public function setPoster(string $poster): void
+    {
+        $this->poster = $poster;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImdbID(): string
+    {
+        return $this->imdbID;
+    }
+
+    /**
+     * @param string $imdbID
+     */
+    public function setImdbID(string $imdbID): void
+    {
+        $this->imdbID = $imdbID;
+    }
+
     public static function create($data)
     {
         $film = new Film();
-      //  $film->setDirector($data['Director']);
+        $film->setImdbID($data['imdbID']);
         $film->setTitle($data['Title']);
-        $film->setYear($data['Year']);
+        $film->setDirector($data['Director']);
+        $film->setYear(preg_replace('/[^0-9]/i', '',$data['Year']));
+        $film->setPoster($data['Poster']);
 
         return $film;
     }

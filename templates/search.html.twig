@@ -19,6 +19,7 @@
     <tr>
         <th>Titre</th>
         <th>Année</th>
+        <th>Poster</th>
         <th>Réalisateur</th>
     </tr>
     </thead>
@@ -31,9 +32,12 @@
             <td>
                 {{ film.year }}
             </td>
-{#            <td>#}
-{#                {{ film.director }}#}
-{#            </td>#}
+            <td>
+                {{ film.director }}
+            </td>
+            <td>
+                <img src="{{ film.poster }}" width="150px"/>
+            </td>
         </tr>
     </tbody>
     {% endfor %}

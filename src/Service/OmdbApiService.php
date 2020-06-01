@@ -16,16 +16,32 @@ class OmdbApiService
         $this->connector = $connector;
     }
 
+    /**
+     * @param $query
+     * @return array
+     * @throws \Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface
+     * @throws \Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface
+     * @throws \Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface
+     * @throws \Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface
+     * @throws \Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface
+     */
     public function searchByTitle($query)
     {
+        $films = [];
+
         $results = $this->connector->request('GET','&s=' . $query);
 
-        if ($datas = $results->toArray()) {
-            $values = $datas['Search'];
-            foreach ($values as $film) {
+        if ('True' === $results->toArray()['Response']) {
+            $values = $results->toArray()['Search'];
+
+            foreach ($values as &$film) {
+                $resultByImdbId = $this->connector->request('GET','&i=' . $film['imdbID']);
+
+                if (!empty($resultByImdbId->toArray())) {
+                    $film['Director'] = $resultByImdbId->toArray()['Director'];
+                }
 
                 $films[] = Film::create($film);
-
             }
         }
 
