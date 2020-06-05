@@ -11,7 +11,14 @@ class SearchController extends AbstractController
 {
     /**
      * @Route("/search", name="search", methods={"GET"})
-     * @return string
+     * @param Request $request
+     * @param OmdbApiService $omdbApiService
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface
+     * @throws \Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface
+     * @throws \Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface
+     * @throws \Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface
+     * @throws \Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface
      */
     public function search(Request $request, OmdbApiService $omdbApiService)
     {
@@ -19,7 +26,7 @@ class SearchController extends AbstractController
         $year = $request->query->get('year');
         $director = $request->query->get('director');
 
-        $results['films'] = $omdbApiService->searchByTitle($title);
+        $results['films'] = $omdbApiService->search($title);
         $results['queries'] = ['title'=>$title, 'year'=>$year, 'director'=>$director];
 
         return $this->render('search.html.twig', $results);

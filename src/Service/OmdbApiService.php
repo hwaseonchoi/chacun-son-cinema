@@ -25,7 +25,7 @@ class OmdbApiService
      * @throws \Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface
      * @throws \Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface
      */
-    public function searchByTitle($query)
+    public function search($query)
     {
         $films = [];
 
