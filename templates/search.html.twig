@@ -1,11 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-<html>
-<header>
-    <title>Chacun son cinéma</title>
-</header>
-<body>
-<h1>Chacun son cinéma</h1>
+
 <form>
     <input name="title" type="text" value="{{ queries.title }}" />
     <button type="submit">search by title</button>
@@ -44,6 +39,4 @@
     </tbody>
     {% endfor %}
 </table>
-</body>
-</html>
 {% endblock %}
