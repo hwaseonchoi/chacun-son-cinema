@@ -4,7 +4,7 @@ namespace App\Service;
 
 use Symfony\Component\HttpClient\HttpClient;
 
-class OmdbApiConnector
+class TmdbApiConnector
 {
     protected $url;
     protected $client;

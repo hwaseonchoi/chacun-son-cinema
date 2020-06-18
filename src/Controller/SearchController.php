@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Service\OmdbApiService;
+use App\Service\TmdbApiService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,7 +12,7 @@ class SearchController extends AbstractController
     /**
      * @Route("/search", name="search", methods={"GET"})
      * @param Request $request
-     * @param OmdbApiService $omdbApiService
+     * @param TmdbApiService $omdbApiService
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface
      * @throws \Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface
@@ -20,7 +20,7 @@ class SearchController extends AbstractController
      * @throws \Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface
      * @throws \Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface
      */
-    public function search(Request $request, OmdbApiService $omdbApiService)
+    public function search(Request $request, TmdbApiService $omdbApiService)
     {
         $title = $request->query->get('title');
         $year = $request->query->get('year');

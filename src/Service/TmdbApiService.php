@@ -4,14 +4,14 @@ namespace App\Service;
 
 use App\Model\Film;
 
-class OmdbApiService
+class TmdbApiService
 {
     /**
-     * @var OmdbApiConnector
+     * @var TmdbApiConnector
      */
     public $connector;
 
-    public function __construct(OmdbApiConnector $connector)
+    public function __construct(TmdbApiConnector $connector)
     {
         $this->connector = $connector;
     }

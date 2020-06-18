@@ -10,7 +10,7 @@ Etant passionnée du cinéma et ayant la fermeture des salles de cinéma pendant
 qui permet de composer chacun ses (meilleurs) films.
 
 ### Third party API
-Je fais appel à l'api [OMDB](http://www.omdbapi.com/) pour permettre la recherche rapide de l'immense base de données d'[IMDB](https://www.imdb.com/).
+Je fais appel à l'api tierce [The Movie Datatabase](https://www.themoviedb.org/) pour permettre la recherche rapide de l'immense base de données d'[IMDB](https://www.imdb.com/).
 
 ## Requirements
 you need [docker-compose](https://docs.docker.com/compose/install/), [docker](https://docs.docker.com/engine/install/) and 
