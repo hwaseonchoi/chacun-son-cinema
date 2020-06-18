@@ -3,9 +3,12 @@
 namespace App\Service;
 
 use App\Model\Film;
+use Symfony\Component\HttpFoundation\Response;
 
 class TmdbApiService
 {
+    public const METHOD_GET = 'GET';
+
     /**
      * @var TmdbApiConnector
      */
@@ -17,34 +20,27 @@ class TmdbApiService
     }
 
     /**
-     * @param $query
-     * @return array
+     * @param int $id
+     * @return mixed
      * @throws \Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface
      * @throws \Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface
      * @throws \Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface
      * @throws \Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface
      * @throws \Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface
      */
-    public function search($query)
+    public function searchById(int $id)
     {
-        $films = [];
+        $film = null;
+        $response = $this->connector->request(
+            static::METHOD_GET,
+            '/movie/' . $id
+        );
 
-        $results = $this->connector->request('GET','&s=' . $query);
-
-        if ('True' === $results->toArray()['Response']) {
-            $values = $results->toArray()['Search'];
-
-            foreach ($values as &$film) {
-                $resultByImdbId = $this->connector->request('GET','&i=' . $film['imdbID']);
-
-                if (!empty($resultByImdbId->toArray())) {
-                    $film['Director'] = $resultByImdbId->toArray()['Director'];
-                }
-
-                $films[] = Film::create($film);
-            }
+        if (Response::HTTP_OK === $response->getStatusCode()) {
+            $results = $response->getContent();
+            $film = Film::create(json_decode($results));
         }
 
-        return $films;
+        return $film;
     }
 }

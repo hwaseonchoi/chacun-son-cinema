@@ -6,37 +6,35 @@
     <button type="submit">search by title</button>
     <input name="year" type="number" value="{{ queries.year }}" />
     <button type="submit">search by year</button>
-    <input name="director" type="text" value="{{ queries.director }}" />
-    <button type="submit">search by director</button>
+{#    <input name="director" type="text" value="{{ queries.director }}" />#}
+{#    <button type="submit">search by director</button>#}
 </form>
 
-<p>Nombre de résultats : {{ films|length }}</p>
 <table>
     <thead>
     <tr>
-        <th>Titre</th>
-        <th>Année</th>
-        <th>Poster</th>
-        <th>Réalisateur</th>
+{#        <th>Titre</th>#}
+{#        <th>Année</th>#}
+{#        <th>Poster</th>#}
+{#        <th>Réalisateur</th>#}
     </tr>
     </thead>
-    {% for film in films %}
+
     <tbody>
         <tr>
+{#            <td>#}
+{#                {{ film.title }}#}
+{#            </td>#}
+{#            <td>#}
+{#                {{ film.year }}#}
+{#            </td>#}
             <td>
-                {{ film.title }}
+                <img src="{{ film.poster }}" width="150px" height="auto" />
             </td>
-            <td>
-                {{ film.year }}
-            </td>
-            <td>
-                {{ film.director }}
-            </td>
-            <td>
-                <img src="{{ film.poster }}" width="150px"/>
-            </td>
+{#            <td>#}
+{#                {{ film.director }}#}
+{#            </td>#}
         </tr>
     </tbody>
-    {% endfor %}
 </table>
 {% endblock %}

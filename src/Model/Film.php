@@ -112,11 +112,11 @@ class Film
     public static function create($data)
     {
         $film = new Film();
-        $film->setImdbID($data['imdbID']);
-        $film->setTitle($data['Title']);
-        $film->setDirector($data['Director']);
-        $film->setYear(preg_replace('/[^0-9]/i', '',$data['Year']));
-        $film->setPoster($data['Poster']);
+        $film->setImdbID($data->imdb_id);
+        $film->setTitle($data->title);
+        $film->setDirector('NA');
+        $film->setYear((int) substr($data->release_date, 0, 4));
+        $film->setPoster($data->poster_path);
 
         return $film;
     }

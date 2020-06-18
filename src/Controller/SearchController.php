@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class SearchController extends AbstractController
 {
     /**
-     * @Route("/search", name="search", methods={"GET"})
+     * @Route("/search/{id}", name="search", methods={"GET"})
      * @param Request $request
      * @param TmdbApiService $omdbApiService
      * @return \Symfony\Component\HttpFoundation\Response
@@ -20,14 +20,13 @@ class SearchController extends AbstractController
      * @throws \Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface
      * @throws \Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface
      */
-    public function search(Request $request, TmdbApiService $omdbApiService)
+    public function getOne(int $id, TmdbApiService $omdbApiService)
     {
-        $title = $request->query->get('title');
-        $year = $request->query->get('year');
-        $director = $request->query->get('director');
+        $criteria['title'] = $request->query->get('title');
+        $criteria['year'] = $request->query->get('year');
 
-        $results['films'] = $omdbApiService->search($title);
-        $results['queries'] = ['title'=>$title, 'year'=>$year, 'director'=>$director];
+        $results['films'] = $omdbApiService->search($criteria);
+        $results['queries'] = ['title'=> $criteria['title'], 'year'=>$criteria['year']];
 
         return $this->render('search.html.twig', $results);
     }

@@ -6,17 +6,28 @@ use Symfony\Component\HttpClient\HttpClient;
 
 class TmdbApiConnector
 {
+    protected $tmdbParam;
     protected $url;
     protected $client;
 
     public function __construct(array $param)
     {
-        $this->url = $param['tmdb'];
+        $this->tmdbParam = $param['tmdb'];
+        $this->url = $this->tmdbParam['base_url'];
         $this->client = HttpClient::create();
     }
 
-    public function request(string $method, string $criteria)
+    public function request(string $method,  string $extendedUrl = null, array $queryParam = [])
     {
-        return $this->client->request($method, $this->url . $criteria);
+        $apiKeyQuery = [
+            'query' => [
+                'api_key' => $this->tmdbParam['api_key'],
+            ]
+        ];
+        return $this->client->request(
+            $method,
+            $this->url  . $extendedUrl,
+            array_merge($queryParam, $apiKeyQuery)
+            );
     }
 }
