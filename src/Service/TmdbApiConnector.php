@@ -9,9 +9,9 @@ class TmdbApiConnector
     protected $url;
     protected $client;
 
-    public function __construct(string $param)
+    public function __construct(array $param)
     {
-        $this->url = $param;
+        $this->url = $param['tmdb'];
         $this->client = HttpClient::create();
     }
 

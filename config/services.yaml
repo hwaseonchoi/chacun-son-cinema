@@ -29,7 +29,7 @@ services:
     # please note that last definitions always *replace* previous ones
     App\Service\TmdbApiConnector:
         arguments:
-            $param: '%api_url.tmdb%'
+            $param: '%api_url%'
 
     App\Service\TmdbApiService:
         arguments:
