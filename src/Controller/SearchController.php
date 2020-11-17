@@ -22,12 +22,13 @@ class SearchController extends AbstractController
      */
     public function getOne(int $id, TmdbApiService $omdbApiService)
     {
-        $criteria['title'] = $request->query->get('title');
-        $criteria['year'] = $request->query->get('year');
+        $results= $omdbApiService->searchById($id);
 
-        $results['films'] = $omdbApiService->search($criteria);
-        $results['queries'] = ['title'=> $criteria['title'], 'year'=>$criteria['year']];
+        $data['title'] = $results->title;
+        $data['director'] = $results->director;
+        $data['year'] = $results->year;
+        $data['poster'] = $results->poster;
 
-        return $this->render('search.html.twig', $results);
+        return $this->render('search.html.twig', $data);
     }
 }

@@ -2,10 +2,10 @@
 {% block body %}
 
 <form>
-    <input name="title" type="text" value="{{ queries.title }}" />
-    <button type="submit">search by title</button>
-    <input name="year" type="number" value="{{ queries.year }}" />
-    <button type="submit">search by year</button>
+{#    <input name="title" type="text" value="{{ queries.title }}" />#}
+{#    <button type="submit">search by title</button>#}
+{#    <input name="year" type="number" value="{{ queries.year }}" />#}
+{#    <button type="submit">search by year</button>#}
 {#    <input name="director" type="text" value="{{ queries.director }}" />#}
 {#    <button type="submit">search by director</button>#}
 </form>
@@ -13,27 +13,27 @@
 <table>
     <thead>
     <tr>
-{#        <th>Titre</th>#}
-{#        <th>Année</th>#}
-{#        <th>Poster</th>#}
-{#        <th>Réalisateur</th>#}
+       <th>Titre</th>
+       <th>Année</th>
+       <th>Poster</th>
+       <th>Réalisateur</th>
     </tr>
     </thead>
 
     <tbody>
         <tr>
-{#            <td>#}
-{#                {{ film.title }}#}
-{#            </td>#}
-{#            <td>#}
-{#                {{ film.year }}#}
-{#            </td>#}
             <td>
-                <img src="{{ film.poster }}" width="150px" height="auto" />
+                {{ title }}
             </td>
-{#            <td>#}
-{#                {{ film.director }}#}
-{#            </td>#}
+            <td>
+                {{ year }}
+            </td>
+            <td>
+                <img src="{{ poster }}" width="150px" height="auto" />
+            </td>
+            <td>
+                {{ director }}
+            </td>
         </tr>
     </tbody>
 </table>
