@@ -9,10 +9,7 @@ class TmdbApiService
 {
     public const METHOD_GET = 'GET';
 
-    /**
-     * @var TmdbApiConnector
-     */
-    public $connector;
+    public TmdbApiConnector $connector;
 
     public function __construct(TmdbApiConnector $connector)
     {
@@ -38,6 +35,7 @@ class TmdbApiService
 
         if (Response::HTTP_OK === $response->getStatusCode()) {
             $results = $response->getContent();
+
             $film = Film::create(json_decode($results));
         }
 
