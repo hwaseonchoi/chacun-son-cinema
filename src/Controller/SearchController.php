@@ -29,6 +29,6 @@ class SearchController extends AbstractController
         $data['year'] = $results->year;
         $data['poster'] = $results->poster;
 
-        return $this->render('search.html.twig', $data);
+        return $this->render('searchById.html.twig', $data);
     }
 }
