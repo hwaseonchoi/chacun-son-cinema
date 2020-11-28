@@ -1,0 +1,20 @@
+<table>
+    <thead>
+    <tr>
+       <th>Titre</th>
+       <th>Poster</th>
+    </tr>
+    </thead>
+    {% for result in results %}
+    <tbody>
+        <tr>
+            <td>
+                {{ result.title }}
+            </td>
+            <td>
+                <img src="{{ image_base_url }}{{ result.poster }}" width="150px" height="auto" />
+            </td>
+        </tr>
+    </tbody>
+    {% endfor %}
+</table>

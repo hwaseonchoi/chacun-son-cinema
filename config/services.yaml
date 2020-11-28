@@ -37,3 +37,7 @@ services:
     App\Service\TmdbApiService:
         arguments:
             $connector: '@App\Service\TmdbApiConnector'
+
+    App\Builder\MovieBuilder:
+        arguments:
+            $tmdbApiService: '@App\Service\TmdbApiService'

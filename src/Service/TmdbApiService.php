@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class TmdbApiService
 {
-    public const METHOD_GET = 'GET';
+    protected const METHOD_GET = 'GET';
 
     public TmdbApiConnector $connector;
 
@@ -40,5 +40,21 @@ class TmdbApiService
         }
 
         return $film;
+    }
+
+    public function getTopRated()
+    {
+        $film = null;
+        $response = $this->connector->request(
+            static::METHOD_GET,
+            '/movie/top_rated',
+        );
+
+        if (Response::HTTP_OK === $response->getStatusCode()) {
+            $results = $response->getContent();
+            if ($results = json_decode($results)->results) {
+                return $results;
+            }
+        }
     }
 }

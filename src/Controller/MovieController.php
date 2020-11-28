@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class SearchController extends AbstractController
+class MovieController extends AbstractController
 {
     /**
      * @Route("/search/{id}", name="search", methods={"GET"})
@@ -20,9 +20,9 @@ class SearchController extends AbstractController
      * @throws \Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface
      * @throws \Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface
      */
-    public function getOne(int $id, TmdbApiService $omdbApiService)
+    public function getOne(int $id, TmdbApiService $tmdbApiService)
     {
-        $results= $omdbApiService->searchById($id);
+        $results= $tmdbApiService->searchById($id);
 
         $data['title'] = $results->title;
         $data['director'] = $results->director;

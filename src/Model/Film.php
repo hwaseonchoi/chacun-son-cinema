@@ -4,30 +4,29 @@ namespace App\Model;
 
 class Film
 {
-    /**
-     * @var string
-     */
-    public $title;
+    public ?int $tmdbId;
+    public string $title;
+    public ?string $director;
+    public ?int $year;
+    public ?string $imdbID;
+    public ?string $poster;
+    public ?Rate $rate;
 
     /**
-     * @var string
+     * @return ?int
      */
-    public $director;
+    public function getTmdbId(): ?int
+    {
+        return $this->id;
+    }
 
     /**
-     * @var int
+     * @param ?int $id
      */
-    public $year;
-
-    /**
-     * @var string
-     */
-    public $imdbID;
-
-    /**
-     * @var string
-     */
-    public $poster;
+    public function setTmdbId(?int $tmdbId): void
+    {
+        $this->tmdbId = $tmdbId;
+    }
 
     /**
      * @return string
@@ -46,7 +45,7 @@ class Film
     }
 
     /**
-     * @return string
+     * @return ?string
      */
     public function getDirector(): string
     {
@@ -54,47 +53,47 @@ class Film
     }
 
     /**
-     * @param string $director
+     * @param ?string $director
      */
-    public function setDirector(string $director): void
+    public function setDirector(?string $director): void
     {
         $this->director = $director;
     }
 
     /**
-     * @return int
+     * @return ?int
      */
-    public function getYear(): int
+    public function getYear(): ?int
     {
         return $this->year;
     }
 
     /**
-     * @param int $year
+     * @param ?int $year
      */
-    public function setYear(int $year): void
+    public function setYear(?int $year): void
     {
         $this->year = $year;
     }
 
     /**
-     * @return string
+     * @return ?string
      */
-    public function getPoster(): string
+    public function getPoster(): ?string
     {
         return $this->poster;
     }
 
     /**
-     * @param string $poster
+     * @param ?string $poster
      */
-    public function setPoster(string $poster): void
+    public function setPoster(?string $poster): void
     {
         $this->poster = $poster;
     }
 
     /**
-     * @return string
+     * @return ?string
      */
     public function getImdbID(): string
     {
@@ -102,17 +101,18 @@ class Film
     }
 
     /**
-     * @param string $imdbID
+     * @param ?string $imdbID
      */
-    public function setImdbID(string $imdbID): void
+    public function setImdbID(?string $imdbID): void
     {
         $this->imdbID = $imdbID;
     }
 
     public static function create($data)
     {
-        $film = new Film();
+        $film = new self();
         $film->setImdbID($data->imdb_id);
+        $film->setTmdbId($data->id);
         $film->setTitle($data->title);
         $film->setDirector('NA');
         $film->setYear((int) substr($data->release_date, 0, 4));
