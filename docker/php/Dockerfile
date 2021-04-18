@@ -1,4 +1,4 @@
-FROM php:7.4-fpm
+FROM php:8.0-fpm
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends vim curl debconf git apt-transport-https apt-utils \
