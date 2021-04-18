@@ -1,10 +1,9 @@
 EXEC=docker exec -it
-#EXEC=$(DC) php-fpm /bin/bash
 CONSOLE=bin/console
 DC=docker-compose
 CONTAINER=php-fpm
 
-# Container
+# Docker container
 build:
 	$(DC) build
 up:
@@ -12,10 +11,13 @@ up:
 down:
 	$(DC) down
 
-# Libs
+# PHP libary
 vendor:
 	$(EXEC) $(CONTAINER) composer install
 .PHONY: vendor
+
+install: vendor
+.PHONY: install
 
 # Terminal
 bash:
