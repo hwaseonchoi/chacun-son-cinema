@@ -9,11 +9,11 @@ class TmdbApiService
 {
     protected const METHOD_GET = 'GET';
 
-    public TmdbApiConnector $connector;
+    public TmdbApiConnector $tmdbConnector;
 
-    public function __construct(TmdbApiConnector $connector)
+    public function __construct(TmdbApiConnector $tmdbConnector)
     {
-        $this->connector = $connector;
+        $this->tmdbConnector = $tmdbConnector;
     }
 
     /**
@@ -28,7 +28,7 @@ class TmdbApiService
     public function searchById(int $id)
     {
         $film = null;
-        $response = $this->connector->request(
+        $response = $this->tmdbConnector->request(
             static::METHOD_GET,
             '/movie/' . $id
         );
@@ -45,9 +45,25 @@ class TmdbApiService
     public function getTopRated()
     {
         $film = null;
-        $response = $this->connector->request(
+        $response = $this->tmdbConnector->request(
             static::METHOD_GET,
             '/movie/top_rated',
+        );
+
+        if (Response::HTTP_OK === $response->getStatusCode()) {
+            $results = $response->getContent();
+            if ($results = json_decode($results)->results) {
+                return $results;
+            }
+        }
+    }
+
+    public function searchByKeyword()
+    {
+        $film = null;
+        $response = $this->tmdbConnector->request(
+            static::METHOD_GET,
+            '/movie/search',
         );
 
         if (Response::HTTP_OK === $response->getStatusCode()) {

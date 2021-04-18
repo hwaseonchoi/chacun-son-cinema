@@ -1,3 +1,12 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+index:
+    path: /
+    controller: App\Action\Index
+
+# Search
+search_by_keyword:
+    path: /search
+    controller: App\Action\Search\Keyword
+
+search_by_id:
+    path: /search/{id}
+    controller: App\Action\Search\Id
