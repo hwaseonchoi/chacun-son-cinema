@@ -58,12 +58,13 @@ class TmdbApiService
         }
     }
 
-    public function searchByKeyword()
+    public function searchByKeyword(array $queries)
     {
         $film = null;
         $response = $this->tmdbConnector->request(
             static::METHOD_GET,
-            '/movie/search',
+            '/search/movie',
+            ['query' => $queries['title']],
         );
 
         if (Response::HTTP_OK === $response->getStatusCode()) {

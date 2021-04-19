@@ -2,11 +2,25 @@
 
 {% block body %}
 <form>
-    <input name="title" type="text" />
+    <input name="title" type="text" value="{% if data is defined and data|length > 0 %}{{ data.queries.title }}{% endif %}" />
     <button type="submit">search by title</button>
-    <input name="year" type="number" />
-    <button type="submit">search by year</button>
-    <input name="director" type="text" />
-    <button type="submit">search by director</button>
 </form>
+<table>
+  {% if data is defined and data|length > 0 %}
+  {% for movie in data.movies %}
+  <thead>
+    <tr>
+      <th>Titre</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        {{ movie.title }}
+      </td>
+    </tr>
+  </tbody>
+  {% endfor %}
+  {% endif %}
+</table>
 {% endblock %}

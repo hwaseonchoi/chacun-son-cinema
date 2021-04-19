@@ -17,18 +17,14 @@ class TmdbApiConnector
         $this->client = HttpClient::create();
     }
 
-    public function request(string $method,  string $extendedUrl = null, array $queryParam = [])
+    public function request(string $method, string $extendedUrl = null, array $queryParam = [])
     {
-        $apiKeyQuery = [
-            'query' => [
-                'api_key' => $this->tmdbParam['api_key'],
-            ]
-        ];
-
+        $queries = array_merge($queryParam, ['api_key' => $this->tmdbParam['api_key']]);
+        
         return $this->client->request(
             $method,
-            $this->url  . $extendedUrl,
-            array_merge($queryParam, $apiKeyQuery)
+            $this->url . $extendedUrl,
+            array_merge($queryParam, ['query' => $queries])
         );
     }
 }

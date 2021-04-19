@@ -12,9 +12,13 @@ class Keyword extends AbstractController
   public function __invoke(Request $request, TmdbApiService $tmdbApiService)
   {
     $title = $request->query->get('title');
-    $year = $request->query->get('year');
-    $director = $request->query->get('director');
 
-    return $this->render('Search/keyword.html.twig');
+    $queries = ['title' => $title];
+    $results = $tmdbApiService->searchByKeyword($queries);
+
+    $data['queries'] = $queries;
+    $data['movies'] = $results;
+
+    return $this->render('Search/keyword.html.twig', ['data' => $data]);
   }
 }
